@@ -2,7 +2,7 @@
 
 Ignition project to test authorization on OPC access for tag providers in Ignition.
 
-This repository contains a demo project to test the authentication of the OPC server to different tag providers. There are two TagProviders: `ProviderA` and `ProviderB` and three OPC users `UserA`, `UserB` and `admin`. User A has only read permissions for Provider A (`a`) and User B has only read permissions for Provider B (`a`). User admin has access to both providers. 
+This repository contains a demo project to test the authentication of the OPC server to different tag providers. There are two TagProviders: `ProviderA` and `ProviderB` and three OPC users `UserA`, `UserB` and `admin`. User A has only read permissions for Provider A (`Authenticated/Roles/ReadA`) and User B has only read permissions for Provider B (`Authenticated/Roles/ReadB`). User admin has access to both providers. 
 
 In the current situation, when trying to browse the different tag providers via OPC, it is only possible to find tags if a user has permissions to access all the tag providers.
 
