@@ -1,0 +1,38 @@
+x-default-logging:
+  &default-logging
+  logging:
+    options:
+      max-size: '100m'
+      max-file: '5'
+    driver: json-file
+
+services:
+  gateway:
+    <<: *default-logging
+    container_name: gateway
+    image: inductiveautomation/ignition:8.1.42
+    env_file: gw-init/gateway.env
+    secrets:
+      - gateway-admin-password
+    ports:
+      - 8088:8088
+      - 8043:8043
+      - 8060:8060
+      - 62541:62541
+    environment:
+      GATEWAY_NETWORK_REQUIRESSL: false
+      GATEWAY_NETWOKR_SECURITYPOLICY: SpecifiedList
+    volumes:
+      - gateway-data:/usr/local/bin/ignition/data
+      - ./gw-backup:/backup
+    restart: unless-stopped
+    command: >
+      -n ignition_gateway
+      -r /backup/restore.gwbk
+
+secrets:
+  gateway-admin-password:
+    file: secrets/gateway-admin-password
+
+volumes:
+  gateway-data:
